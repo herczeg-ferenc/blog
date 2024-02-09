@@ -9,11 +9,9 @@ services:
       environment:
         - HOME
         - COMPOSER_HOME=$HOME/.composer
-        - SSH_AUTH_SOCK=/ssh-auth.sock
       networks:
         - "traefik_proxy"
       volumes:
-        - $SSH_AUTH_SOCK:/ssh-auth.sock
         - $HOME/.ssh:$HOME/.ssh:ro
         - $HOME/.composer:$HOME/.composer
         - $PWD:/app
@@ -25,16 +23,16 @@ services:
 
     web:
       <<: *php
-      entrypoint: ["symfony", "serve", "--no-tls", "--allow-http", "--port=8000"]
+      entrypoint: ["symfony", "serve", "--no-tls", "--allow-http", "--port=8011"]
       ports:
-        - 8000:80
+        - 8011:80
       networks:
         - "traefik_proxy"
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.template_web.rule=Host(`template.ingatlan-local.com`)"
+        - "traefik.http.routers.template_web.rule=Host(`blog.ingatlan-local.com`)"
         - "traefik.http.routers.template_web.service=svc_template_web"
-        - "traefik.http.services.svc_template_web.loadbalancer.server.port=8000"
+        - "traefik.http.services.svc_template_web.loadbalancer.server.port=8011"
       env_file:
         - .env
 
