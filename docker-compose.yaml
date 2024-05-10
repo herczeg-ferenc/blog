@@ -35,7 +35,35 @@ services:
         - "traefik.http.routers.template_web.rule=Host(`template.ingatlan-local.com`)"
         - "traefik.http.routers.template_web.service=svc_template_web"
         - "traefik.http.services.svc_template_web.loadbalancer.server.port=8000"
+      env_file:
+        - .env
 
+    mysql:
+      image: 'mysql/mysql-server:8.0'
+      ports:
+          - '${FORWARD_DB_PORT:-3306}:3306'
+      environment:
+          MYSQL_ROOT_PASSWORD: 'secret'
+          MYSQL_ROOT_HOST: "%"
+          MYSQL_DATABASE: 'teszt'
+          MYSQL_USER: 'admin'
+          MYSQL_PASSWORD: 'admin123'
+          MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      volumes:
+          - 'mysqlvolume:/var/lib/mysql'
+      networks:
+          - traefik_proxy
+      healthcheck:
+          test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
+          retries: 3
+          timeout: 5s
+      env_file:
+          - .env
+                
 networks:
   traefik_proxy:
     external: true
+
+volumes:
+  mysqlvolume:
+    driver: local
