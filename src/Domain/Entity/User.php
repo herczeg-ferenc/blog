@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
-use App\Infrastructure\Repository\UserRepository;
+use App\Infrastructure\Repository\DefaultUserRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Entity(repositoryClass: DefaultUserRepository::class)]
 class User
 {
     #[ORM\Id]
