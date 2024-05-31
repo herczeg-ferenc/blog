@@ -10,13 +10,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-//    #[Route('/', name: 'default')]
-//    public function index(): Response
-//    {
-//        // return hello
-//        return $this->json([
-//            'message' => 'Welcome to your new controller!',
-//            'path' => 'src/Infrastructure/Controller/DefaultController.php',
-//        ]);
-//    }
+    #[Route('/', name: 'default')]
+   public function index(): Response
+   {
+        // return hello
+       return $this->json([
+            'message' => 'Welcome to your new controller!',
+            'path' => 'src/Infrastructure/Controller/UserController.php',
+            
+       ]);
+   }
 }

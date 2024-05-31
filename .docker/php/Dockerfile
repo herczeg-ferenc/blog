@@ -15,7 +15,7 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /tmp
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
-RUN install-php-extensions @composer opcache apcu intl zip sockets zlib curl redis
+RUN install-php-extensions @composer opcache apcu intl zip sockets zlib curl redis pdo pdo_mysql
 
 # Install Symfony CLI
 RUN wget https://get.symfony.com/cli/installer -O - | bash \
