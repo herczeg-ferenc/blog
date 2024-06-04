@@ -32,6 +32,7 @@ class DefaultUserRepository extends ServiceEntityRepository implements UserRepos
         $user->setName($data['name']);
         $user->setCreatedAt($dateTimeImmutable);
         $user->setUpdatedAt($dateTimeImmutable);
+        $user->setAge($data['age']);
 
         $entityManager = $this->getEntityManager();
         $entityManager->persist($user);

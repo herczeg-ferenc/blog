@@ -6,6 +6,7 @@ namespace App\Infrastructure\Controller;
 
 use App\Application\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -16,13 +17,17 @@ class UserController extends AbstractController
     ) {}
 
     #[Route('/user', name: 'create_user')]
-    public function createUser(): Response
+    public function createUser(Request $request): Response    
     {   
+        
         $user = $this->userService->createUser([
-            'email' => 'teszteremail88@gmail.com',
-            'name' => 'Teszter Elek',
+            'email' => $request->query->get('email', 'teszmail@gmail.com'),
+            'name' => $request->query->get('name', 'Teszt'),
+            'age' => $request->query->get('age', '18'),
         ]);
 
         return new Response('Saved new product with id '.$user->getId());
     }
+
+    
 }
