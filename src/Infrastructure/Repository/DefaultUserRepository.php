@@ -6,7 +6,6 @@ use App\Domain\UserRepository;
 use App\Domain\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-
 /**
  * @extends ServiceEntityRepository<User>
  *
@@ -40,4 +39,5 @@ class DefaultUserRepository extends ServiceEntityRepository implements UserRepos
 
         return $user;
     }
+
 }
