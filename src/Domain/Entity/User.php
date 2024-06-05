@@ -21,6 +21,9 @@ class User
     #[ORM\Column(length: 255)]
     private ?string $Name = null;
 
+    #[ORM\Column(length: 255)]
+    private ?int $Age = null;
+
     #[ORM\Column]
     private ?\DateTimeImmutable $CreatedAt = null;
 
@@ -56,6 +59,18 @@ class User
         return $this;
     }
 
+    public function getAge(): ?int
+    {
+        return $this->Age;
+    }
+
+    public function setAge(int $Age): User
+    {
+        $this->Age = $Age;
+
+        return $this;
+    }
+
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->CreatedAt;
@@ -78,5 +93,5 @@ class User
         $this->UpdatedAt = $UpdatedAt;
 
         return $this;
-    }
+    }   
 }
